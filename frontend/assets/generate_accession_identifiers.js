@@ -1,29 +1,12 @@
 $(function () {
 
-  var padding = 3;
-
-  var pad_number = function (number, padding) {
-    var s = ('' + number);
-
-    var padding_needed = (padding - s.length)
-
-    if (padding_needed > 0) {
-      s = (new Array(padding_needed + 1).join("0") + s);
-    }
-
-    return s;
-  };
-
-
   var generate_accession_id = function () {
     $.ajax({
       url: APP_PATH + "plugins/generate_accession_identifier/generate",
       data: {},
       type: "POST",
       success: function(identifier) {
-        identifier_number = pad_number(identifier.number, padding);
-        $('#accession_id_0_').val(identifier.year + identifier_number);
-        //$('#accession_id_1_').val(pad_number(identifier.number, padding));
+        $('#accession_id_0_').val(identifier.number);
 
         $('#accession_id_1_').enable();
       },
