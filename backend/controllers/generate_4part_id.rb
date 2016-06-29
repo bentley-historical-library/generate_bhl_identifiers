@@ -6,7 +6,7 @@ class ArchivesSpaceService < Sinatra::Base
     .description("Generate a new identifier based on the year and a running number")
     .params()
     .permissions([])
-    .returns([200, "{'year', 'YYYY', 'number', N}"]) \
+    .returns([200, "{'number', N}"]) \
   do
     number = Sequence.get("bhl_accession_identifier")
 
