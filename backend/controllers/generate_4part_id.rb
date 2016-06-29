@@ -9,7 +9,10 @@ class ArchivesSpaceService < Sinatra::Base
     .returns([200, "{'year', 'YYYY', 'number', N}"]) \
   do
     year = Time.now.strftime('%Y')
-    number = Sequence.get("GENERATE_ACCESSION_IDENTIFIER_#{year}")
+    number = Sequence.get("bhl_accession_identifier_#{year}")
+    if number == 0
+      number = 1
+    end
 
     json_response(:year => year, :number => number)
   end
@@ -21,7 +24,10 @@ class ArchivesSpaceService < Sinatra::Base
     .returns([200, "{'year', 'YYYY', 'number', N}"]) \
   do
     year = Time.now.strftime('%Y')
-    number = Sequence.get("GENERATE_RESOURCE_IDENTIFIER_#{year}")
+    number = Sequence.get("bhl_resource_identifier_#{year}")
+    if number == 0
+      number = 1
+    end
 
     json_response(:year => year, :number => number)
   end
