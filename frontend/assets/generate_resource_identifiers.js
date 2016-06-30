@@ -22,7 +22,9 @@ $(function () {
       type: "POST",
       success: function(identifier) {
         identifier_number = pad_number(identifier.number, padding);
-        $('#resource_id_0_').val(identifier.year + identifier_number);
+        resource_identifier = identifier.year + identifier_number;
+        $('#resource_id_0_').val(collection_id);
+        $('#resource_ead_id_').val('umich-bhl-' + collection_id);
         //$('#resource_id_1_').val(pad_number(identifier.number, padding));
 
         $('#resource_id_1_').enable();
