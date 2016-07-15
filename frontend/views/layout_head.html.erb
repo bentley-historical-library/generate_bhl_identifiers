@@ -1,9 +1,9 @@
 <% if controller.controller_name == "accessions" && controller.action_name == 'new' %>
-  <%= javascript_include_tag "#{@base_url}/assets/generate_accession_identifiers.js" %>
+  <%= javascript_include_tag "#{AppConfig[:frontend_prefix]}assets/generate_accession_identifiers.js" %>
 <% end %>
 
 <% if controller.controller_name == "resources" && controller.action_name == 'new' %>
-  <%= javascript_include_tag "#{@base_url}/assets/generate_resource_identifiers.js" %>
+  <%= javascript_include_tag "#{AppConfig[:frontend_prefix]}assets/generate_resource_identifiers.js" %>
 <% end %>
 
 
