@@ -31,7 +31,7 @@ class ArchivesSpaceService < Sinatra::Base
     .returns([200, "OK"]) \
   do
     year = Time.now.strftime('%Y')
-    sequence_name = "bhl_resource_identifer_#{year}"
+    sequence_name = "bhl_resource_identifier_#{year}"
     Sequence.init(sequence_name, params[:value])
   end
 
@@ -42,9 +42,12 @@ class ArchivesSpaceService < Sinatra::Base
     .returns([200, "{'year', 'YYYY', 'number', N}"]) \
   do
     year = Time.now.strftime('%Y')
-    number = Sequence.get("bhl_resource_identifier_#{year}")
+    sequence_name = "bhl_resource_identifier_#{year}"
+    number = Sequence.get(sequence_name)
+
+    # Increment the Sequence again so that it starts at 1
     if number == 0
-      number = 1
+      number = Sequence.get(sequence_name)
     end
 
     json_response(:year => year, :number => number)
