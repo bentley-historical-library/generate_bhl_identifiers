@@ -31,7 +31,7 @@ class ArchivesSpaceService < Sinatra::Base
     .returns([200, "OK"]) \
   do
     year = Time.now.strftime('%Y')
-    sequence_name = 'bhl_resource_identifer_#{year}'
+    sequence_name = "bhl_resource_identifer_#{year}"
     Sequence.init(sequence_name, params[:value])
   end
 
