@@ -5,7 +5,7 @@ class ArchivesSpaceService < Sinatra::Base
   Endpoint.post('/plugins/generate_accession_identifiers')
     .description("Initialize the bhl_accession_identifier Sequence")
     .params(["value", Integer, "The value with which the Sequence will be initialized"])
-    .permissions([:manage_repository])
+    .permissions([:update_accession_record])
     .returns([200, "OK"]) \
   do
     Sequence.init("bhl_accession_identifier", params[:value])
@@ -25,7 +25,7 @@ class ArchivesSpaceService < Sinatra::Base
   Endpoint.post('/plugins/generate_resource_identifiers')
     .description("Initialize the bhl_resource_identifier Sequence")
     .params(["value", Integer, "The value with which the Sequence will be initialized"])
-    .permissions([:manage_repository])
+    .permissions([:update_resource_record])
     .returns([200, "OK"]) \
   do
     year = Time.now.strftime('%Y')
