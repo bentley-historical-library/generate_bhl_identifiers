@@ -10,6 +10,18 @@ class ArchivesSpaceService < Sinatra::Base
     .returns([200, "OK"]) \
   do
     Sequence.init("bhl_accession_identifier", params[:value])
+    json_response(:status => "OK")
+  end
+
+  Endpoint.post('/repositories/:repo_id/plugins/generate_accession_identifiers/update')
+    .description("Update the bhl_accession_identifier Sequence")
+    .params(["value", Integer, "The value to which the Sequence will be updated"],
+            ["repo_id", :repo_id])
+    .permissions([:manage_repository])
+    .returns([200, "OK"]) \
+  do
+    SequenceUpdater.update("bhl_accession_identifier", params[:value])
+    json_response(:status => "OK")
   end
 
   Endpoint.post('/repositories/:repo_id/plugins/generate_accession_identifiers/next')
@@ -33,6 +45,20 @@ class ArchivesSpaceService < Sinatra::Base
     year = Time.now.strftime('%Y')
     sequence_name = "bhl_resource_identifier_#{year}"
     Sequence.init(sequence_name, params[:value])
+    json_response(:status => "OK")
+  end
+
+  Endpoint.post('/repositories/:repo_id/plugins/generate_resource_identifiers/update')
+    .description("Update the bhl_resource_identifier Sequence")
+    .params(["value", Integer, "The value to which the Sequence will be updated"],
+            ["repo_id", :repo_id])
+    .permissions([:manage_repository])
+    .returns([200, "OK"]) \
+  do
+    year = Time.now.strftime('%Y')
+    sequence_name = "bhl_resource_identifier_#{year}"
+    SequenceUpdater.update(sequence_name, params[:value])
+    json_response(:status => "OK")
   end
 
   Endpoint.post('/repositories/:repo_id/plugins/generate_resource_identifiers/next')
