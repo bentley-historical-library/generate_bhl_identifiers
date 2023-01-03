@@ -1,6 +1,6 @@
 class GenerateResourceIdentifiersController < ApplicationController
 
-  skip_before_filter :unauthorised_access
+  skip_before_action :unauthorised_access
 
   def generate
     response = JSONModel::HTTP::post_form("/repositories/#{session[:repo_id]}/plugins/generate_resource_identifiers/next")
