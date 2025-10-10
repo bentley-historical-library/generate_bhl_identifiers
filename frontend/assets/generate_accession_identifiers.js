@@ -1,8 +1,12 @@
 $(function () {
 
   var generate_accession_id = function () {
+    var tmp = APP_PATH + "plugins/generate_accession_identifier/generate";
+    console.log("URL2: " + tmp);
+
     $.ajax({
-      url: APP_PATH + "plugins/generate_accession_identifier/generate",
+      //url: APP_PATH + "plugins/generate_accession_identifier/generate",
+      url: "/plugins/generate_accession_identifier/generate",
       data: {},
       type: "POST",
       success: function(identifier) {
