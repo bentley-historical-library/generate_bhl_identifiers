@@ -1,10 +1,16 @@
 <% if controller.controller_name == "accessions" && controller.action_name == 'new' %>
 <script type="text/javascript">
+// generate_bhl_identifiers
 $(function () {
 
   var generate_accession_id = function () {
+
+    // var tmp = APP_PATH + "plugins/generate_accession_identifier/generate";
+    // console.log("URL1: " + tmp);
+
     $.ajax({
-      url: APP_PATH + "plugins/generate_accession_identifier/generate",
+      // url: APP_PATH + "plugins/generate_accession_identifier/generate",
+      url: "/plugins/generate_accession_identifier/generate",
       data: {},
       type: "POST",
       success: function(identifier) {
@@ -62,7 +68,8 @@ $(function () {
 
   var generate_resource_id = function () {
     $.ajax({
-      url: APP_PATH + "plugins/generate_resource_identifier/generate",
+      // url: APP_PATH + "plugins/generate_resource_identifier/generate",
+      url: "/plugins/generate_resource_identifier/generate",
       data: {},
       type: "POST",
       success: function(identifier) {
