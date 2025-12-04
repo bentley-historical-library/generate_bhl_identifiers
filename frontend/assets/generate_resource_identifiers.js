@@ -1,6 +1,4 @@
-// Apparently this file is not used and it is generated in layout_head..?
-
-$(function () {
+$( document ).ready(function() {
 
   var padding = 3;
 
@@ -57,11 +55,20 @@ $(function () {
     return true;
   };
 
+   try {
+      // need to wait until this section has loaded in the document
+      $(document).on("loadedrecordform.aspace", function(event) {
+
+        if (identifier_is_blank()) {
+          generate_resource_id();
+        }
+
+      });
+    } catch (error) {
+        console.log (error);
+    }
 
 
-  if (identifier_is_blank()) {
-    generate_resource_id();
-  }
 
 })
 
