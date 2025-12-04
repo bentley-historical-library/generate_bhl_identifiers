@@ -1,3 +1,5 @@
+// Apparently this file is not used and it is generated in layout_head..?
+
 $(function () {
 
   var padding = 3;
@@ -18,16 +20,29 @@ $(function () {
   var generate_resource_id = function () {
     $.ajax({
       url: APP_PATH + "plugins/generate_resource_identifier/generate",
+      cache: false,
       data: {},
       type: "POST",
-      success: function(identifier) {
-        var collection_id = identifier.year + pad_number(identifier.number, padding);
-        $('#resource_id_0_').val(collection_id);
-        $('#resource_ead_id_').val('umich-bhl-' + collection_id);
-        //$('#resource_id_1_').val(pad_number(identifier.number, padding));
+      success: function(identifier, textStatus) {
+        console.log("BHL Resource Identifier OK")
+        console.log("===== " + textStatus)
 
-        $('#resource_id_1_').enable();
+        if (identifier) {
+          var collection_id = identifier.year + pad_number(identifier.number, padding);
+          $('#resource_id_0_').val(collection_id);
+          $('#resource_ead_id_').val('umich-bhl-' + collection_id);
+          //$('#resource_id_1_').val(pad_number(identifier.number, padding));
+
+          $('#resource_id_1_').enable();
+        } else {
+          $('#resource_id_0_').val("ERROR");
+        }
+
       },
+      fail: function(jqXHR, textStatus, errorThrown){
+        console.log("BHL Resource Identifier Failed");
+        console.log("===== " + textStatus);
+      },      
     })
   };
 
